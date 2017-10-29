@@ -119,7 +119,7 @@ export default class App extends React.Component {
     const MainNavigator = TabNavigator(
       {
         welcome: { screen: WelcomeScreen },
-        //auth: { screen: AuthScreen },
+        auth: { screen: AuthScreen },
         main: { screen: MainDrawer }
       },
       {

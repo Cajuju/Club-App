@@ -9,10 +9,10 @@ export const FACEBOOK_API_KEY = "YOUR_KEY_HERE";
 
 // https://console.firebase.google.com/
 export const GOOGLE_FIREBASE_CONFIG = {
-  apiKey: "YOUR_KEY_HERE",
-  authDomain: "YOUR_KEY_HERE",
-  databaseURL: "YOUR_KEY_HERE",
-  projectId: "YOUR_KEY_HERE",
-  storageBucket: "YOUR_KEY_HERE",
-  messagingSenderId: "YOUR_KEY_HERE"
+  apiKey: "AIzaSyCzbuKVj1LNYue5FgvWEG5fdq7QFXYGspM",
+  authDomain: "club-app-8efbf.firebaseapp.com",
+  databaseURL: "https://club-app-8efbf.firebaseio.com",
+  projectId: "club-app-8efbf",
+  storageBucket: "club-app-8efbf.appspot.com",
+  messagingSenderId: "934507360472"
 };
