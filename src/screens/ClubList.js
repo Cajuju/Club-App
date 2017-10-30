@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, AcitivityIndicator, AsyncStorage } from 'react-native';
+import { ScrollView, Text } from 'react-native';
 import { Card, Button, Icon } from 'react-native-elements';
 
 import { PRIMARY_COLOR, SECONDARY_COLOR } from '../constants/style';
@@ -28,15 +28,47 @@ class ClubList extends Component {
     
     render() {
         return (
-            <View>
-                <Text>ClubList</Text>
-                <Text>ClubList</Text>
-                <Text>ClubList</Text>
-                <Text>ClubList</Text>
-                <Text>ClubList</Text>
-                <Text>ClubList</Text>
-                <Text>ClubList</Text>
-            </View>
+            <ScrollView>
+                <Card>
+                    <Text>Club Name</Text>
+                </Card>
+
+                <Card>
+                    <Text>Club Name</Text>
+                </Card>
+
+                <Card>
+                    <Text>Club Name</Text>
+                </Card>
+
+                <Card>
+                    <Text>Club Name</Text>
+                </Card>
+
+                <Card>
+                    <Text>Club Name</Text>
+                </Card>
+                
+                <Card>
+                    <Text>Club Name</Text>
+                </Card>
+
+                <Card>
+                    <Text>Club Name</Text>
+                </Card>
+
+                <Card>
+                    <Text>Club Name</Text>
+                </Card>
+
+                <Card>
+                    <Text>Club Name</Text>
+                </Card>
+
+                <Card>
+                    <Text>Club Name</Text>
+                </Card>
+            </ScrollView>
         );
     }
 }

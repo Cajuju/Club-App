@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, AcitivityIndicator, AsyncStorage } from 'react-native';
+import { ScrollView, Text } from 'react-native';
 import { Card, Button, Icon } from 'react-native-elements';
 
 import { PRIMARY_COLOR, SECONDARY_COLOR } from '../constants/style';
@@ -27,15 +27,47 @@ class Subscriptions extends Component {
 
     render() {
         return (
-            <View>
-                <Text>Subscriptions</Text>
-                <Text>Subscriptions</Text>
-                <Text>Subscriptions</Text>
-                <Text>Subscriptions</Text>
-                <Text>Subscriptions</Text>
-                <Text>Subscriptions</Text>
-                <Text>Subscriptions</Text>
-            </View>
+            <ScrollView>
+                <Card>
+                    <Text>Subscription</Text>
+                </Card>
+
+                <Card>
+                    <Text>Subscription</Text>
+                </Card>
+
+                <Card>
+                    <Text>Subscription</Text>
+                </Card>
+
+                <Card>
+                    <Text>Subscription</Text>
+                </Card>
+
+                <Card>
+                    <Text>Subscription</Text>
+                </Card>
+                
+                <Card>
+                    <Text>Subscription</Text>
+                </Card>
+
+                <Card>
+                    <Text>Subscription</Text>
+                </Card>
+
+                <Card>
+                    <Text>Subscription</Text>
+                </Card>
+
+                <Card>
+                    <Text>Subscription</Text>
+                </Card>
+
+                <Card>
+                    <Text>Subscription</Text>
+                </Card>
+            </ScrollView>
         );
     }
 }

@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { View, Text, AsyncStorage } from 'react-native';
+import { Text, ScrollView } from 'react-native';
 import { Card, Button, Icon } from 'react-native-elements';
 
 import { PRIMARY_COLOR, SECONDARY_COLOR } from '../constants/style';
 
 class Feed extends Component {
     static navigationOptions = {
-        title: 'Activity Feed',
+        title: 'Feed',
         tabBarIcon: ({ tintColor }) => {
             return (
                 <Icon
@@ -27,15 +27,47 @@ class Feed extends Component {
 
     render() {
         return (
-            <View>
-                <Text>Feed</Text>
-                <Text>Feed</Text>
-                <Text>Feed</Text>
-                <Text>Feed</Text>
-                <Text>Feed</Text>
-                <Text>Feed</Text>
-                <Text>Feed</Text>
-            </View>
+            <ScrollView>
+                <Card>
+                    <Text>Feed</Text>
+                </Card>
+
+                <Card>
+                    <Text>Feed</Text>
+                </Card>
+
+                <Card>
+                    <Text>Feed</Text>
+                </Card>
+
+                <Card>
+                    <Text>Feed</Text>
+                </Card>
+
+                <Card>
+                    <Text>Feed</Text>
+                </Card>
+                
+                <Card>
+                    <Text>Feed</Text>
+                </Card>
+
+                <Card>
+                    <Text>Feed</Text>
+                </Card>
+
+                <Card>
+                    <Text>Feed</Text>
+                </Card>
+
+                <Card>
+                    <Text>Feed</Text>
+                </Card>
+
+                <Card>
+                    <Text>Feed</Text>
+                </Card>
+            </ScrollView>
         );
     }
 }
