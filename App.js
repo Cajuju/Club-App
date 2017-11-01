@@ -14,53 +14,55 @@ import Profile from './src/screens/Profile';
 import ClubList from './src/screens/ClubList';
 import Settings from './src/screens/Settings';
 import Login from './src/screens/Login';
+import LogOut from './src/screens/LogOut';
 
 import { GOOGLE_FIREBASE_CONFIG } from './src/constants/api_keys';
 
 class App extends Component {
- // Upon loading app, initialize firebase
- componentWillMount() {
-  // DTG - Debugging
+  // Upon loading app, initialize firebase
+  componentWillMount() {
+    // DTG - Debugging
 
-  firebase.initializeApp(GOOGLE_FIREBASE_CONFIG);
+    firebase.initializeApp(GOOGLE_FIREBASE_CONFIG);
 
-  //console.log('App.js: Signing Out');
-  //AsyncStorage.removeItem('fb_token'); // Just used for testing to clear item
-  //SecureStore.deleteItemAsync('fb_token'); // Just used for testing to clear item
-  //firebase.auth().signOut();
-}
+    //console.log('App.js: Signing Out');
+    //AsyncStorage.removeItem('fb_token'); // Just used for testing to clear item
+    //SecureStore.deleteItemAsync('fb_token'); // Just used for testing to clear item
+    //firebase.auth().signOut();
+  }
 
   render() {
-    //Creates the Navigation with Header and bottom navbar (Still working on settings one)
-    const MainNavigator = TabNavigator({
-      Main: {
-        screen: StackNavigator({
-          Header: {
-            screen: TabNavigator({
-              Feed: { screen: Feed },
-              Clubs: { screen: ClubList },
-              Subscriptions: { screen: Subscriptions },
-              Profile: { 
-                screen: TabNavigator({
-                  // Login: { screen: Login },
-                  Profile: { screen: Profile }
-                }, { navigationOptions: { tabBarVisible: false } })
-               } 
-            }, { navigationOptions: { tabBarVisible: true } })
-          },
-          Settings: {
-            screen: StackNavigator({
-              Settings: { screen: Settings }
-            }, { headerMode: 'none' })
-          }
-        })
-      }
-    }, { navigationOptions: { tabBarVisible: false } });
+    //////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////
+    // Breaking down the navigator helps with complex screen layout
+    // 
+    const SubNav = TabNavigator({
+        Login: { screen: Login },
+        Profile: { screen: Profile },
+        //LogOut: { screen: LogOut }
+      }, {
+        navigationOptions: { tabBarVisible: false } }
+    );
 
+    const MainNavigator2 = StackNavigator({
+      Main: {
+        screen: TabNavigator({
+          Feed: { screen: Feed },
+          Clubs: { screen: ClubList },
+          Subscriptions: { screen: Subscriptions },
+          SubNav: { screen: SubNav }
+        }, { navigationOptions: { tabBarVisible: true } })
+      },
+      Settings: {
+        screen: StackNavigator({
+          Settings: { screen: Settings }
+        }, { headerMode: 'none' })
+      }
+    });
     return (
       <Provider store={store}>
         <View style={styles.container}>
-          <MainNavigator />
+          <MainNavigator2 />
         </View>
       </Provider>
     );
