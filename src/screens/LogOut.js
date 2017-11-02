@@ -61,7 +61,14 @@ class Login extends Component {
         //   index: 0,
         //   actions: [{ type: 'Navigate', routeName: 'searchResults' }]
         // });
-        this.props.navigation.navigate('Feed');
+        const resetAction = NavigationActions.reset({
+          index: 0,
+          actions: [
+            NavigationActions.navigate({ routeName: 'Main' })
+          ]
+        });
+
+        this.props.navigation.dispatch(resetAction);
       }
     });
   }

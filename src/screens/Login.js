@@ -44,7 +44,7 @@ class Login extends Component {
     // Check if user is persisted and "login" by navigating to main if so
     if (firebase.auth().currentUser) {
       console.log(`${firebase.auth().currentUser.email} already logged in.`);
-      return this.props.navigation.navigate('Feed'); // Navigate to main page
+      return this.props.navigation.navigate('Profile'); // Navigate to main page
     }
 
     //console.log(this.props.navigation.state.params);
@@ -65,7 +65,7 @@ class Login extends Component {
         console.log(`--uid: ${user.uid}`);
 
         // Navigate to main page
-        this.props.navigation.navigate('Profile');
+        this.props.navigation.navigate('Main');
         return;
       }
 

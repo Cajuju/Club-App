@@ -39,9 +39,14 @@ class App extends Component {
     const SubNav = TabNavigator({
         Login: { screen: Login },
         Profile: { screen: Profile },
-        //LogOut: { screen: LogOut }
+        LogOut: { screen: LogOut }
       }, {
-        navigationOptions: { tabBarVisible: false } }
+        navigationOptions: { tabBarVisible: false },
+        tabBarPosition: 'bottom',
+        swipeEnabled: false,
+        lazy: true,
+        animationEnabled: false
+      }
     );
 
     const MainNavigator2 = StackNavigator({
@@ -51,12 +56,23 @@ class App extends Component {
           Clubs: { screen: ClubList },
           Subscriptions: { screen: Subscriptions },
           SubNav: { screen: SubNav }
-        }, { navigationOptions: { tabBarVisible: true } })
+        }, { 
+          navigationOptions: { tabBarVisible: true },
+          tabBarPosition: 'bottom',
+          swipeEnabled: false,
+          lazy: true,
+          animationEnabled: false
+        })
       },
       Settings: {
         screen: StackNavigator({
           Settings: { screen: Settings }
-        }, { headerMode: 'none' })
+        }, { 
+          headerMode: 'none',
+          swipeEnabled: false,
+          lazy: true,
+          animationEnabled: false
+        })
       }
     });
     return (

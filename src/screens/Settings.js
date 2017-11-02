@@ -22,7 +22,7 @@ class Settings extends Component {
                 <Text>Settings</Text>
                 <Text>Settings</Text>
                 {/* Log Out is still in progress */}
-                {/* <Text onPress={() => navigate('LogOut')}>Log Out</Text> */}
+                {<Text onPress={() => navigate('LogOut')}>Log Out</Text>}
             </View>
         );
     }
