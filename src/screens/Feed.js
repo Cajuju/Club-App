@@ -7,6 +7,7 @@ import { PRIMARY_COLOR, SECONDARY_COLOR } from '../constants/style';
 class Feed extends Component {
     static navigationOptions = {
         title: 'Feed',
+        headerLeft: null,
         tabBarIcon: ({ tintColor }) => {
             return (
                 <Icon

@@ -61,6 +61,8 @@ class Login extends Component {
         //   index: 0,
         //   actions: [{ type: 'Navigate', routeName: 'searchResults' }]
         // });
+        
+        //When the user logs out successfully, this will take them to the Main
         const resetAction = NavigationActions.reset({
           index: 0,
           actions: [

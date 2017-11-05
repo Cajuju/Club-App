@@ -69,7 +69,7 @@ class Login extends Component {
         return;
       }
 
-      this.props.navigation.navigate('Feed');
+      // this.props.navigation.navigate('Feed');
     });
   }
 
@@ -79,14 +79,6 @@ class Login extends Component {
   componentWillReceiveProps(nextProps) {
     this.setState({ showLoading: nextProps.loading });
   }
-
-  //////////////////////////////////////////////////////////////////////////////////
-  // Handler for facebook login button
-  onFbButtonPress = () => {
-    this.props.facebookLogin();
-    //AsyncStorage.removeItem('fb_token'); // Just used for testing to clear item
-    //SecureStore.deleteItemAsync('fb_token');
-  };
 
   //////////////////////////////////////////////////////////////////////////////////
   // Update the property when changed
@@ -140,16 +132,6 @@ class Login extends Component {
             onPress={this.onStandardSignupButtonPress}
           />
 
-          <Text style={{ textAlign: 'center', marginTop: 10 }}>- OR -</Text>
-
-          <SocialIcon
-            type="facebook"
-            title="Sign Up With Facebook"
-            raised={false}
-            button
-            onPress={this.onFbButtonPress}
-          />
-
           <View style={styles.detailWrapperStyle}>
             <Text style={{ textAlign: 'center' }}>Already have an account?&nbsp;</Text>
             <TouchableWithoutFeedback onPress={this.onSignupLoginToggle}>
@@ -168,16 +150,6 @@ class Login extends Component {
           //icon={{ name: 'vpn-key' }}
           backgroundColor={PRIMARY_COLOR}
           onPress={this.onStandardLoginButtonPress}
-        />
-
-        <Text style={{ textAlign: 'center', marginTop: 10 }}>- OR -</Text>
-
-        <SocialIcon
-          type="facebook"
-          title="Log In With Facebook"
-          raised={false}
-          button
-          onPress={this.onFbButtonPress}
         />
 
         <View style={styles.detailWrapperStyle}>
@@ -229,7 +201,7 @@ class Login extends Component {
         <View style={{ marginBottom: 10 }}>
           <FormLabel>E-mail</FormLabel>
           <FormInput
-            placeholder="jon@email.com"
+            placeholder="email@email.com"
             value={this.props.email}
             onChangeText={this.onEmailChange}
           />
@@ -238,7 +210,7 @@ class Login extends Component {
         <View style={{ marginBottom: 10 }}>
           <FormLabel>Password</FormLabel>
           <FormInput
-            placeholder="p@ssw0rd"
+            placeholder="password"
             secureTextEntry
             value={this.props.password}
             onChangeText={this.onPasswordChange}

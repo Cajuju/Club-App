@@ -7,13 +7,14 @@ import { PRIMARY_COLOR, SECONDARY_COLOR } from '../constants/style';
 class Profile extends Component {
     static navigationOptions = ({ navigation }) => ({
         title: 'Profile',
+        headerLeft: null,
         tabBarIcon: ({ tintColor }) => {
             return (
                 <Icon
                     type="font-awesome"
                     name="user"
                     size={20}
-                    color={tintColor}
+                    color={'black'}
                 />
             );
         },

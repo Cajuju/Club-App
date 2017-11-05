@@ -7,6 +7,7 @@ import { PRIMARY_COLOR, SECONDARY_COLOR } from '../constants/style';
 class Subscriptions extends Component {
     static navigationOptions = {
         title: 'Subscription',
+        headerLeft: null,
         tabBarIcon: ({ tintColor }) => {
             return (
                 <Icon

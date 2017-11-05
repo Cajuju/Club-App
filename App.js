@@ -35,10 +35,11 @@ class App extends Component {
     //////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////
     // Breaking down the navigator helps with complex screen layout
-    // 
+    //
     const SubNav = TabNavigator({
         Login: { screen: Login },
         Profile: { screen: Profile },
+        Settings: { screen: Settings },
         LogOut: { screen: LogOut }
       }, {
         navigationOptions: { tabBarVisible: false },
@@ -48,8 +49,7 @@ class App extends Component {
         animationEnabled: false
       }
     );
-
-    const MainNavigator2 = StackNavigator({
+    const MainNavigator = StackNavigator({
       Main: {
         screen: TabNavigator({
           Feed: { screen: Feed },
@@ -58,27 +58,16 @@ class App extends Component {
           SubNav: { screen: SubNav }
         }, { 
           navigationOptions: { tabBarVisible: true },
-          tabBarPosition: 'bottom',
-          swipeEnabled: false,
-          lazy: true,
-          animationEnabled: false
-        })
-      },
-      Settings: {
-        screen: StackNavigator({
-          Settings: { screen: Settings }
-        }, { 
-          headerMode: 'none',
-          swipeEnabled: false,
-          lazy: true,
-          animationEnabled: false
         })
       }
     });
+
+    
+    
     return (
       <Provider store={store}>
         <View style={styles.container}>
-          <MainNavigator2 />
+          <MainNavigator />
         </View>
       </Provider>
     );
