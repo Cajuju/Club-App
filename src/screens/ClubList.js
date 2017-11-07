@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, Text } from 'react-native';
+import { View, ScrollView, Text, Image } from 'react-native';
 import { Card, Button, Icon } from 'react-native-elements';
 
 import { PRIMARY_COLOR, SECONDARY_COLOR } from '../constants/style';
@@ -26,7 +26,7 @@ class ClubList extends Component {
             />
          )
     }
-    
+
     render() {
         return (
             // ---------------TO DO LIST-----------------------
@@ -34,50 +34,69 @@ class ClubList extends Component {
             // Cards will have background image of the club
             // Need to figure out where it will pull all the information from (unless I choose to hard code all the information)
             // Make Category Seperator
-            
+
+            //Updated the version for react native elements since the current version made the title render always even when it was empty
             <ScrollView>
-                <Card>
-                    <Text>Club Name</Text>
+                <Card 
+                    title="APASO"
+                    // require() gives an error but works properly
+                    image={require('../../assets/clubs/apasoCover.png')}
+                    imageStyle={{
+                        flex: 1,
+                        height: 270
+                    }}
+                >
+                    <Text style={{ marginBottom: 10, textAlign: 'center' }}>
+                        Asian Pacific American Student Organization
+                    </Text>
+                    <View style={{ flexDirection: 'row' }}>
+                        <Button
+                            icon={{ name: 'add' }}
+                            backgroundColor='#03A9F4'
+                            buttonStyle={{
+                                borderRadius: 0,
+                                marginLeft: 0,
+                                marginRight: 0,
+                                marginBottom: 0
+                            }}
+                            title='SUBSCRIBE'
+                        />
+                        <Button
+                            icon={{ name: 'pageview' }}
+                            backgroundColor='#03A9F4'
+                            buttonStyle={{
+                                borderRadius: 0,
+                                marginLeft: 0,
+                                marginRight: 0,
+                                marginBottom: 0
+                            }}
+                            title='View Page'
+                        />
+                    </View>
                 </Card>
 
                 <Card>
-                    <Text>Club Name</Text>
+                    <Text>Armenian Student Association</Text>
                 </Card>
 
                 <Card>
-                    <Text>Club Name</Text>
+                    <Text>Black Students Association</Text>
                 </Card>
 
                 <Card>
-                    <Text>Club Name</Text>
+                    <Text>Latin American Student Association</Text>
                 </Card>
 
                 <Card>
-                    <Text>Club Name</Text>
-                </Card>
-                
-                <Card>
-                    <Text>Club Name</Text>
-                </Card>
-
-                <Card>
-                    <Text>Club Name</Text>
-                </Card>
-
-                <Card>
-                    <Text>Club Name</Text>
-                </Card>
-
-                <Card>
-                    <Text>Club Name</Text>
-                </Card>
-
-                <Card>
-                    <Text>Club Name</Text>
+                    <Text>Pacific Islander Organization</Text>
                 </Card>
             </ScrollView>
         );
     }
 }
+
+const styles = {
+
+};
 
 export default ClubList;
