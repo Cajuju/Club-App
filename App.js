@@ -12,6 +12,7 @@ import Feed from './src/screens/Feed';
 import Subscriptions from './src/screens/Subscriptions';
 import Profile from './src/screens/Profile';
 import ClubList from './src/screens/ClubList';
+import Club from './src/screens/Club';
 import Settings from './src/screens/Settings';
 import Login from './src/screens/Login';
 import LogOut from './src/screens/LogOut';
@@ -49,20 +50,26 @@ class App extends Component {
         animationEnabled: false
       }
     );
+
     const MainNavigator = StackNavigator({
       Main: {
         screen: TabNavigator({
           Feed: { screen: Feed },
-          Clubs: { screen: ClubList },
+          ClubList: { screen: ClubList },
           Subscriptions: { screen: Subscriptions },
           SubNav: { screen: SubNav }
         }, { 
           navigationOptions: { tabBarVisible: true },
         })
+      },
+      Club: {
+        screen: TabNavigator({
+          Club: { screen: Club }
+        }, {
+          navigationOptions: { tabBarVisible: false }
+        })
       }
     });
-
-    
     
     return (
       <Provider store={store}>

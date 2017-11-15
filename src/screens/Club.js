@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { StackNavigator, TabNavigator } from 'react-navigation';
 import { View, Text, AcitivityIndicator, AsyncStorage } from 'react-native';
 
 import { PRIMARY_COLOR, SECONDARY_COLOR } from '../constants/style';

@@ -1,6 +1,10 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
-import { View, ScrollView, Text, Image } from 'react-native';
+import { View, ScrollView, ListView, Text, Image } from 'react-native';
+import { StackNavigator, TabNavigator } from 'react-navigation';
+import { connect } from 'react-redux';
 import { Card, Button, Icon } from 'react-native-elements';
+import { clubFetch } from '../actions';
 
 import { PRIMARY_COLOR, SECONDARY_COLOR } from '../constants/style';
 
@@ -22,12 +26,35 @@ class ClubList extends Component {
             <Icon
                  type='material-community'
                  name='filter-variant'
-                 style={{ marginRight: 20 }}
+                 style={{ marginRight: 50 }}
             />
          )
+    } 
+
+    componentWillMount() {
+        this.props.clubFetch();
+
+        // this.createDataSource(this.props);
+    }
+
+    compoenentWillReceiveProps(nextProps) {
+        // this.createDataSource(nextProps);
+        console.log(nextProps);
+    }
+    
+    renderCard() {
+        return (
+            <Card>
+                <Text>
+                    {this.props.name}
+                </Text>
+            </Card>
+        );
     }
 
     render() {
+        //const { navigate } = this.props.navigation;
+
         return (
             // ---------------TO DO LIST-----------------------
             // Make as many cards as there is clubs
@@ -37,66 +64,19 @@ class ClubList extends Component {
 
             //Updated the version for react native elements since the current version made the title render always even when it was empty
             <ScrollView>
-                <Card 
-                    title="APASO"
-                    // require() gives an error but works properly
-                    image={require('../../assets/clubs/apasoCover.png')}
-                    imageStyle={{
-                        flex: 1,
-                        height: 270
-                    }}
-                >
-                    <Text style={{ marginBottom: 10, textAlign: 'center' }}>
-                        Asian Pacific American Student Organization
-                    </Text>
-                    <View style={{ flexDirection: 'row' }}>
-                        <Button
-                            icon={{ name: 'add' }}
-                            backgroundColor='#03A9F4'
-                            buttonStyle={{
-                                borderRadius: 0,
-                                marginLeft: 0,
-                                marginRight: 0,
-                                marginBottom: 0
-                            }}
-                            title='SUBSCRIBE'
-                        />
-                        <Button
-                            icon={{ name: 'pageview' }}
-                            backgroundColor='#03A9F4'
-                            buttonStyle={{
-                                borderRadius: 0,
-                                marginLeft: 0,
-                                marginRight: 0,
-                                marginBottom: 0
-                            }}
-                            title='View Page'
-                        />
-                    </View>
-                </Card>
-
-                <Card>
-                    <Text>Armenian Student Association</Text>
-                </Card>
-
-                <Card>
-                    <Text>Black Students Association</Text>
-                </Card>
-
-                <Card>
-                    <Text>Latin American Student Association</Text>
-                </Card>
-
-                <Card>
-                    <Text>Pacific Islander Organization</Text>
-                </Card>
+                {this.renderCard()}
             </ScrollView>
         );
     }
 }
 
-const styles = {
+const mapStateToProps = state => {
+    const clubs = _.map(state.clubs, (name) => {
+        console.log('Inside val: ' + name);
+      return { name };
+    });
 
-};
+    return { clubs };
+  };
 
-export default ClubList;
+export default connect(mapStateToProps, { clubFetch })(ClubList);
