@@ -14,7 +14,7 @@ const styles = {
     containerStyle: {
         borderWidth: 1,
         borderRadius: 2,
-        borderColor: '#e74c3c',
+        borderColor: '#27ae60',
         borderBottomWidth: 0,
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.1,
@@ -27,4 +27,4 @@ const styles = {
 };
 
 // Make component reusable
-export default Card;
+export { Card };

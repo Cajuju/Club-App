@@ -5,7 +5,7 @@ import { View } from 'react-native';
 //Create component
 const CardSection = (props) => {
     return (
-        <View style={styles.containerStyle}>
+        <View style={[styles.containerStyle, props.style]}>
             {props.children}
         </View>
     );
@@ -19,9 +19,9 @@ const styles = {
         backgroundColor: 'white',
         justifyContent: 'flex-start',
         flexDirection: 'row',   // spaces items vertically
-        borderColor: '#e74c3c',
+        borderColor: '#27ae60',
         position: 'relative',
     }
 };
 
-export default CardSection;
+export { CardSection };
