@@ -1,6 +1,12 @@
 /////////////////////////////////////////////////////////////////////////////
 // Keys to export (or use internally)
 
+// https://developers.google.com/places/web-service/
+export const GOOGLE_PLACES_API_KEY = 'YOUR_KEY_HERE';
+
+// https://developers.facebook.com/apps/
+export const FACEBOOK_API_KEY = 'YOUR_KEY_HERE';
+
 // https://console.firebase.google.com/
 export const GOOGLE_FIREBASE_CONFIG = {
   apiKey: 'AIzaSyCzbuKVj1LNYue5FgvWEG5fdq7QFXYGspM',
