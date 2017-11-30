@@ -1,5 +1,7 @@
 import firebase from 'firebase';
-import { CLUB_FETCH_SUCCESS } from './types';
+import { 
+    CLUB_FETCH_SUCCESS,
+} from './types';
 
 // Called to receive information of the club from Firebase
 export const clubFetch = () => {

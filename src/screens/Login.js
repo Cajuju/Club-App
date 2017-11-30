@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableWithoutFeedback } from 'react-native';
+import { NavigationActions } from 'react-navigation';
 import firebase from 'firebase';
 import {
   FormLabel,
@@ -13,12 +14,13 @@ import { connect } from 'react-redux';
 import * as actions from '../actions';
 import { Spinner } from '../components/Spinner';
 
+
 import { PRIMARY_COLOR } from '../constants/style';
 
 // Purpose of this auth screen is just to call action creator
 class Login extends Component {
     static navigationOptions = () => ({
-        title: 'Profile',
+        title: 'Login',
         tabBarIcon: ({ tintColor }) => {
             return (
                 // Type will import from a specific website
@@ -32,6 +34,7 @@ class Login extends Component {
             );
         }
     })
+
   //////////////////////////////////////////////////////////////////////////////////
   // State definition
   state = { inSignupMode: false, showLoading: true }; // Just for local use
@@ -41,10 +44,18 @@ class Login extends Component {
   componentWillMount() {
     //this.props.loading = true;
 
+    //Reset Navigations
+  const resetAction = NavigationActions.reset({
+    index: 0,
+    actions: [
+      NavigationActions.navigate({ routeName: 'Main' })
+    ]
+  });
+
     // Check if user is persisted and "login" by navigating to main if so
     if (firebase.auth().currentUser) {
       console.log(`${firebase.auth().currentUser.email} already logged in.`);
-      return this.props.navigation.navigate('Profile'); // Navigate to main page
+      return this.props.navigation.dispatch(resetAction); // Navigate to main page
     }
 
     //console.log(this.props.navigation.state.params);
@@ -64,8 +75,12 @@ class Login extends Component {
         //console.log(`--Provider: ${user.providerId}`);
         console.log(`--uid: ${user.uid}`);
 
-        // Navigate to main page
-        this.props.navigation.navigate('Main');
+        if (`${user.uid}` === '0DuPG18OlYRWUKpaugPvK6t6IIE3') {
+          this.props.navigation.dispatch(resetAction);
+          this.props.navigation.navigate('Admin');
+        } else {
+          this.props.navigation.dispatch(resetAction);
+        }
         return;
       }
 

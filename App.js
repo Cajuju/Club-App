@@ -12,11 +12,11 @@ import Feed from './src/screens/Feed';
 import Subscriptions from './src/screens/Subscriptions';
 import Profile from './src/screens/Profile';
 import ClubList from './src/screens/ClubList';
-import Club from './src/screens/Club';
+//import Club from './src/screens/Club';
 import Settings from './src/screens/Settings';
 import Login from './src/screens/Login';
 import LogOut from './src/screens/LogOut';
-import ClubCreate from './src/screens/ClubCreate';
+
 
 import { GOOGLE_FIREBASE_CONFIG } from './src/constants/api_keys';
 
@@ -45,44 +45,42 @@ class App extends Component {
     //////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////
     // Breaking down the navigator helps with complex screen layout
-    
-    const SubNav = TabNavigator({
-        Login: { screen: Login },
-        Profile: { screen: Profile },
-        Settings: { screen: Settings },
-        LogOut: { screen: LogOut }
-      }, {
-        navigationOptions: { tabBarVisible: false },
-        tabBarPosition: 'bottom',
-        swipeEnabled: false,
-        lazy: true,
-        animationEnabled: false
-      }
-    );
 
-    const Create = TabNavigator({
-      ClubCreate: { screen: ClubCreate },
+    const Admin = TabNavigator({
+      Feed: { screen: Feed },
+      ClubList: { screen: ClubList }
+    }, {
+      tabBarPosition: 'bottom'
     });
 
+    ////////////////////////////////////////////////////////////////////////////////
+    const noUser = TabNavigator({
+      Feed: { screen: Feed },
+      ClubList: { screen: ClubList },
+      Login: { screen: Login }
+    }, {
+      tabBarPosition: 'bottom'
+    });
+
+    ////////////////////////////////////////////////////////////////////////////////
+    const yesUser = TabNavigator({
+      Feed: { screen: Feed },
+      ClubList: { screen: ClubList },
+      Subscriptions: { screen: Subscriptions },
+      Profile: { screen: Profile }
+    }, {
+      tabBarPosition: 'bottom'
+    });
+
+    ////////////////////////////////////////////////////////////////////////////
     const MainNavigator = StackNavigator({
-      Main: {
-        screen: TabNavigator({
-          Feed: { screen: Feed },
-          ClubList: { screen: ClubList },
-          Subscriptions: { screen: Subscriptions },
-          Profile: { screen: SubNav }
-        }, { 
-          navigationOptions: { tabBarVisible: true },
-          tabBarPosition: 'bottom'
-        })
-      },
-      Club: {
-        screen: TabNavigator({
-          Club: { screen: Club }
-        }, {
-          navigationOptions: { tabBarVisible: false }
-        })
-      }
+      noUser: { screen: noUser },
+      Main: { screen: yesUser },
+      Admin: { screen: Admin },
+      Settings: { screen: Settings },
+      LogOut: { screen: LogOut }
+    }, {
+      navigationOptions: { tabBarVisible: false },
     });
     
     return (

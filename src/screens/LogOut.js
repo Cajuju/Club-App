@@ -16,7 +16,8 @@ class Login extends Component {
   static navigationOptions = {
     //tabBarVisible: false,
     title: 'LogOut',
-    drawerIcon: ({ tintColor }) => <Icon type="entypo" name="log-out" size={25} color={tintColor} />
+    drawerIcon: ({ tintColor }) => <Icon type="entypo" name="log-out" size={25} color={tintColor} />,
+    header: null
 };
 
   //////////////////////////////////////////////////////////////////////////////////
@@ -42,7 +43,7 @@ class Login extends Component {
       if (user) {
         // Print out debug info
         console.log(`${user.email} still logged in?!?!?`);
-        this.props.navigation.navigate('search');
+        this.props.navigation.navigate('Main');
 
         // Navigate to main page
         //this.props.navigation.navigate('main');
@@ -66,7 +67,7 @@ class Login extends Component {
         const resetAction = NavigationActions.reset({
           index: 0,
           actions: [
-            NavigationActions.navigate({ routeName: 'Main' })
+            NavigationActions.navigate({ routeName: 'noUser' })
           ]
         });
 

@@ -1,44 +1,44 @@
 import React, { Component } from 'react';
 import { View, Text, Picker } from 'react-native';
 import { connect } from 'react-redux';
-import { clubUpdate } from '../actions';
+import { employeeUpdate } from '../actions';
 import { CardSection, Input } from '../components';
 
-class ClubForm extends Component {
+class EmployeeForm extends Component {
     render() {
         return (
             <View>
                  <CardSection>
                         <Input 
                             label="Name"
-                            placeholder="Club Name"
+                            placeholder="Jane"
                             value={this.props.name}
-                            onChangeText={value => this.props.clubUpdate({ prop: 'name', value })}
+                            onChangeText={value => this.props.employeeUpdate({ prop: 'name', value })}
                         />
                 </CardSection>
 
                 <CardSection>
                     <Input 
-                        label="Detail"
-                        placeholder="Your Club's Short Description"
-                        value={this.props.detail}
-                        onChangeText={value => this.props.clubUpdate({ prop: 'detail', value })}
+                        label="Phone"
+                        placeholder="555-555-5555"
+                        value={this.props.phone}
+                        onChangeText={value => this.props.employeeUpdate({ prop: 'phone', value })}
                     />
                 </CardSection>
 
                 <CardSection style={{ flexDirection: 'column' }}>
-                    <Text style={styles.pickerTextStyle}>category</Text>
+                    <Text style={styles.pickerTextStyle}>Shift</Text>
                     <Picker
-                        selectedValue={this.props.category}
-                        onValueChange={value => this.props.ClubUpdate({ prop: 'category', value })}
+                        selectedValue={this.props.shift}
+                        onValueChange={value => this.props.employeeUpdate({ prop: 'shift', value })}
                     >
-                        <Picker.Item label="Ethnic Organization" value="Ethnic" />
-                        <Picker.Item label="Performing Arts" value="Performing Arts" />
-                        <Picker.Item label="Social" value="Social" />
-                        <Picker.Item label="Service" value="Service" />
-                        <Picker.Item label="Academic" value="Academic" />
-                        <Picker.Item label="Honor Societies" value="Honor" />
-                        <Picker.Item label="Athletics" value="Athletics" />
+                        <Picker.Item label="Monday" value="Monday" />
+                        <Picker.Item label="Tuesday" value="Tuesday" />
+                        <Picker.Item label="Wednesday" value="Wednesday" />
+                        <Picker.Item label="Thursday" value="Thursday" />
+                        <Picker.Item label="Friday" value="Friday" />
+                        <Picker.Item label="Saturday" value="Saturday" />
+                        <Picker.Item label="Sunday" value="Sunday" />
                     </Picker>
                 </CardSection>
             </View>
@@ -54,9 +54,9 @@ const styles = {
 };
 
 const mapStateToProps = (state) => {
-    const { name, detail, category } = state.clubForm;
+    const { name, phone, shift } = state.employeeForm;
 
-    return { name, detail, category };
+    return { name, phone, shift };
 };
 
-export default connect(mapStateToProps, { clubUpdate })(ClubForm);
+export default connect(mapStateToProps, { employeeUpdate })(EmployeeForm);

@@ -33,51 +33,48 @@ class ClubList extends Component {
 
     componentWillMount() {
         this.props.clubFetch();
-
-        // this.createDataSource(this.props);
-    }
-
-    compoenentWillReceiveProps(nextProps) {
-        // this.createDataSource(nextProps);
-        console.log(nextProps);
     }
     
     renderCard() {
         const { navigate } = this.props.navigation;
-        const test = this.props.club.name;
-        console.log(test);
-        return (
-            <Card
-                title={this.props.club.name}
-                titleStyle={{ fontSize: 20 }}
-            >
-                <View style={{ flexDirection: 'row' }}>
-                    <Button
-                        icon={{ name: 'add' }}
-                        backgroundColor='#03A9F4'
-                        buttonStyle={{ 
-                            borderRadius: 0,
-                            marginLeft: 0,
-                            marginRight: 0,
-                            marginBottom: 0
-                        }}
-                        title='SUBSCRIBE'
-                    />
-                    <Button
-                        icon={{ name: 'pageview' }}
-                        backgroundColor='#03A9F4'
-                        buttonStyle={{
-                            borderRadius: 0,
-                            marginLeft: 0,
-                            marginRight: 0,
-                            marginBottom: 0
-                        }}
-                        title='View Page'
-                        onPress={() => navigate('Club')}
-                    />
-                </View>
-            </Card>
-        );
+        // const test = this.props.club.name;
+        // console.log('renderCard() test: ' + test);
+
+        // Condition where if there are no clubs in the database, it will not render any cards
+        if (this.props.club.name != null) {
+            return (
+                <Card
+                    title={this.props.club.name}
+                    titleStyle={{ fontSize: 20 }}
+                >
+                    <View style={{ flexDirection: 'row' }}>
+                        <Button
+                            icon={{ name: 'add' }}
+                            backgroundColor='#03A9F4'
+                            buttonStyle={{ 
+                                borderRadius: 0,
+                                marginLeft: 0,
+                                marginRight: 0,
+                                marginBottom: 0
+                            }}
+                            title='SUBSCRIBE'
+                        />
+                        <Button
+                            icon={{ name: 'pageview' }}
+                            backgroundColor='#03A9F4'
+                            buttonStyle={{
+                                borderRadius: 0,
+                                marginLeft: 0,
+                                marginRight: 0,
+                                marginBottom: 0
+                            }}
+                            title='View Page'
+                            onPress={() => navigate('Club')}
+                        />
+                    </View>
+                </Card>
+            );
+        }
     }
 
     render() {
