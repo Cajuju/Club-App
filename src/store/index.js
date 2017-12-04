@@ -13,6 +13,7 @@ const store = createStore(
   )
 );
 
+
 // Whenever redux state changes, put it directly into AsyncStorage
 // Whitelist says our redux state may have many different pieces of
 // state/keys associated to it...we are only concerned with the

@@ -66,6 +66,7 @@ class Login extends Component {
       this.props.loading = false;
       this.setState({ showLoading: this.props.loading }); // Retrigger components
 
+      console.log('=================================');
       console.log('onAuthStateChanged()');
       if (user) {
         // Print out debug info
@@ -135,6 +136,32 @@ class Login extends Component {
   };
 
   //////////////////////////////////////////////////////////////////////////////////
+  // Get screen style (used to center activity spinner when loading)
+  getScreenStyle() {
+    if (this.state.showLoading) {
+      return styles.spinnerStyle;
+    }
+  }
+
+   //////////////////////////////////////////////////////////////////////////////////
+  // Render password retype button if in signup mode
+  renderPasswordRetypeButton() {
+    if (this.state.inSignupMode) {
+      return (
+        <View style={{ marginBottom: 10 }}>
+          <FormLabel>Retype Password</FormLabel>
+          <FormInput
+            placeholder="p@ssw0rd"
+            secureTextEntry
+            value={this.props.passwordRetype}
+            onChangeText={this.onPasswordRetypeChange}
+          />
+        </View>
+      );
+    }
+  }
+
+  //////////////////////////////////////////////////////////////////////////////////
   // Render login buttons conditionally (show spinner when working on login)
   renderButtons() {
     if (this.state.inSignupMode) {
@@ -177,32 +204,6 @@ class Login extends Component {
         </View>
       </View>
     );
-  }
-
-  //////////////////////////////////////////////////////////////////////////////////
-  // Render password retype button if in signup mode
-  renderPasswordRetypeButton() {
-    if (this.state.inSignupMode) {
-      return (
-        <View style={{ marginBottom: 10 }}>
-          <FormLabel>Retype Password</FormLabel>
-          <FormInput
-            placeholder="p@ssw0rd"
-            secureTextEntry
-            value={this.props.passwordRetype}
-            onChangeText={this.onPasswordRetypeChange}
-          />
-        </View>
-      );
-    }
-  }
-
-  //////////////////////////////////////////////////////////////////////////////////
-  // Get screen style (used to center activity spinner when loading)
-  getScreenStyle() {
-    if (this.state.showLoading) {
-      return styles.spinnerStyle;
-    }
   }
 
   //////////////////////////////////////////////////////////////////////////////////

@@ -16,6 +16,9 @@ import ClubList from './src/screens/ClubList';
 import Settings from './src/screens/Settings';
 import Login from './src/screens/Login';
 import LogOut from './src/screens/LogOut';
+import ClubCreate from './src/screens/ClubCreate';
+import ClubEdit from './src/screens/ClubEdit';
+import ClubForm from './src/screens/ClubForm';
 
 
 import { GOOGLE_FIREBASE_CONFIG } from './src/constants/api_keys';
@@ -48,9 +51,14 @@ class App extends Component {
 
     const Admin = TabNavigator({
       Feed: { screen: Feed },
-      ClubList: { screen: ClubList }
+      ClubList: { screen: ClubList },
+      ClubCreate: { screen: ClubCreate },
+      LogOut: { screen: LogOut }
     }, {
-      tabBarPosition: 'bottom'
+      tabBarPosition: 'bottom',
+      swipeEnabled: false,
+      lazy: true, // Each screen will not mount/load until user clicks on them
+      animationEnabled: false
     });
 
     ////////////////////////////////////////////////////////////////////////////////
@@ -59,7 +67,7 @@ class App extends Component {
       ClubList: { screen: ClubList },
       Login: { screen: Login }
     }, {
-      tabBarPosition: 'bottom'
+      tabBarPosition: 'bottom',
     });
 
     ////////////////////////////////////////////////////////////////////////////////

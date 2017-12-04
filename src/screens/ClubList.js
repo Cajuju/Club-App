@@ -34,45 +34,62 @@ class ClubList extends Component {
     componentWillMount() {
         this.props.clubFetch();
     }
+
+    componentWillReceiveProps(nextProps) {
+        // console.log('=================================');
+        // console.log('componentWillReceiveProps this.props.club test: ');
+        // console.log(this.props.club);
+        if (this.props.clubs !== nextProps.clubs) {
+            this.setState({ clubs: nextProps.clubs });
+        }
+        // console.log('=================================');
+        // console.log('componentWillReceiveProps nextProps test: ');
+        // console.log(nextProps.club);
+    }
+
     
     renderCard() {
         const { navigate } = this.props.navigation;
-        // const test = this.props.club.name;
-        // console.log('renderCard() test: ' + test);
+        const blank = '';
+        console.log('=================================');
+        console.log('renderCard() test: ');
+        console.log(this.props);
+        console.log(this.props.clubs);
+        console.log(this.props.clubs[0]);
 
         // Condition where if there are no clubs in the database, it will not render any cards
-        if (this.props.club.name != null) {
+        if (blank === '') {
             return (
                 <Card
-                    title={this.props.club.name}
+                    title={blank}
                     titleStyle={{ fontSize: 20 }}
                 >
-                    <View style={{ flexDirection: 'row' }}>
-                        <Button
-                            icon={{ name: 'add' }}
-                            backgroundColor='#03A9F4'
-                            buttonStyle={{ 
-                                borderRadius: 0,
-                                marginLeft: 0,
-                                marginRight: 0,
-                                marginBottom: 0
-                            }}
-                            title='SUBSCRIBE'
-                        />
-                        <Button
-                            icon={{ name: 'pageview' }}
-                            backgroundColor='#03A9F4'
-                            buttonStyle={{
-                                borderRadius: 0,
-                                marginLeft: 0,
-                                marginRight: 0,
-                                marginBottom: 0
-                            }}
-                            title='View Page'
-                            onPress={() => navigate('Club')}
-                        />
-                    </View>
-                </Card>
+                <View style={{ flexDirection: 'row' }}>
+                    <Button
+                        icon={{ name: 'add' }}
+                        backgroundColor='#03A9F4'
+                        buttonStyle={{ 
+                            borderRadius: 0,
+                            marginLeft: 0,
+                            marginRight: 0,
+                            marginBottom: 0
+                        }}
+                        title='SUBSCRIBE'
+                    />
+                    <Button
+                        icon={{ name: 'pageview' }}
+                        backgroundColor='#03A9F4'
+                        buttonStyle={{
+                            borderRadius: 0,
+                            marginLeft: 0,
+                            marginRight: 0,
+                            marginBottom: 0
+                        }}
+                        title='View Page'
+                        onPress={() => navigate('Club')}
+                    />
+                </View>
+            </Card>
             );
         }
     }
@@ -93,10 +110,23 @@ class ClubList extends Component {
     }
 }
 
-function mapStateToProps({ clubs }) {
-    return {
-        club: clubs.club
-    };
-}
+const mapStateToProps = state => {
+    const clubs = _.map(state.clubs, (val, uid) => {
+      return { ...val, uid };
+    });
+    console.log('=================================');
+    console.log('mapStateToPropts test: ');
+    console.log(clubs);
+    return { clubs };
+  };
+
+// function mapStateToProps({ clubs }) {
+//     console.log('=================================');
+//     console.log('mapStateToPropts test: ');
+//     console.log(clubs.club);
+//     return {
+//         club: clubs.club
+//     };
+// }
 
 export default connect(mapStateToProps, { clubFetch })(ClubList);

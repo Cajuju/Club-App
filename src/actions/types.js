@@ -1,4 +1,7 @@
 export const CLUB_FETCH_SUCCESS = 'club_fetch_success';
+export const CLUB_UPDATE = 'club_update';
+export const CLUB_CREATE = 'club_create';
+export const CLUB_SAVE_SUCCESS = 'club_save_success';
 
 export const FACEBOOK_LOGIN_SUCCESS = 'facebook_login_success';
 export const FACEBOOK_LOGIN_FAIL = 'facebook_login_fail';
