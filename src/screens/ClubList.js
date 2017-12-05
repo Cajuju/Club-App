@@ -29,7 +29,8 @@ class ClubList extends Component {
                  style={{ marginRight: 50 }}
             />
          )
-    } 
+    }
+    
 
     componentWillMount() {
         this.props.clubFetch();
@@ -50,59 +51,55 @@ class ClubList extends Component {
     
     renderCard() {
         const { navigate } = this.props.navigation;
-        const blank = '';
-        console.log('=================================');
-        console.log('renderCard() test: ');
-        console.log(this.props);
-        console.log(this.props.clubs);
-        console.log(this.props.clubs[0]);
+        return this.props.clubs.map(clubs => {
+            const {
+                name, detail, category
+            } = clubs;
 
-        // Condition where if there are no clubs in the database, it will not render any cards
-        if (blank === '') {
             return (
                 <Card
-                    title={blank}
-                    titleStyle={{ fontSize: 20 }}
+                title={name}
+                titleStyle={{ fontSize: 20 }}
                 >
-                <View style={{ flexDirection: 'row' }}>
-                    <Button
-                        icon={{ name: 'add' }}
-                        backgroundColor='#03A9F4'
-                        buttonStyle={{ 
-                            borderRadius: 0,
-                            marginLeft: 0,
-                            marginRight: 0,
-                            marginBottom: 0
-                        }}
-                        title='SUBSCRIBE'
-                    />
-                    <Button
-                        icon={{ name: 'pageview' }}
-                        backgroundColor='#03A9F4'
-                        buttonStyle={{
-                            borderRadius: 0,
-                            marginLeft: 0,
-                            marginRight: 0,
-                            marginBottom: 0
-                        }}
-                        title='View Page'
-                        onPress={() => navigate('Club')}
-                    />
-                </View>
+                    <Text style={{ textAlign: 'center', marginBottom: 10 }}>
+                            {detail}
+                    </Text>
+                    <Text style={{ marginBottom: 10 }}>
+                            {category}
+                    </Text>
+                    <View style={{ flexDirection: 'row' }}>
+                        
+                        <Button
+                            icon={{ name: 'add' }}
+                            backgroundColor='#03A9F4'
+                            buttonStyle={{ 
+                                borderRadius: 0,
+                                marginLeft: 0,
+                                marginRight: 0,
+                                marginBottom: 0
+                            }}
+                            title='SUBSCRIBE'
+                        />
+                        <Button
+                            icon={{ name: 'pageview' }}
+                            backgroundColor='#03A9F4'
+                            buttonStyle={{
+                                borderRadius: 0,
+                                marginLeft: 0,
+                                marginRight: 0,
+                                marginBottom: 0
+                            }}
+                            title='View Page'
+                            onPress={() => navigate('Club')}
+                        />
+                    </View>
             </Card>
             );
-        }
+        });
     }
 
     render() {
         return (
-            // ---------------TO DO LIST-----------------------
-            // Make as many cards as there is clubs
-            // Cards will have background image of the club
-            // Need to figure out where it will pull all the information from (unless I choose to hard code all the information)
-            // Make Category Seperator
-
-            //Updated the version for react native elements since the current version made the title render always even when it was empty
             <ScrollView>
                 {this.renderCard()}
             </ScrollView>

@@ -35,7 +35,6 @@ class ClubEdit extends Component {
         return (
             <Card>
                 <ClubForm />
-
                 <CardSection>
                     <Button onPress={this.onButtonPress.bind(this)}>
                         Save Changes
