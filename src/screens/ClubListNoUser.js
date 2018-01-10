@@ -1,21 +1,24 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
-import { View, ScrollView, Text, Image, TouchableOpacity } from 'react-native';
+import { View, ScrollView, ListView, Text, Image, TouchableOpacity } from 'react-native';
 import { StackNavigator, TabNavigator } from 'react-navigation';
 import { connect } from 'react-redux';
 import { Card, Button, Icon } from 'react-native-elements';
-import { clubSubFetch, clubSubRemove } from '../actions';
+import { clubFetch, clubSubAdd } from '../actions';
+
 import { PRIMARY_COLOR, SECONDARY_COLOR } from '../constants/style';
 
-class Subscriptions extends Component {
+class ClubListWithUser extends Component {
     static navigationOptions = {
-        title: 'Subscription',
+        title: 'APU Clubs',
         headerLeft: null,
+        lazy: true, // Each screen will not mount/load until user clicks on them
         tabBarIcon: ({ tintColor }) => {
             return (
                 <Icon
-                    name="star"
-                    size={25}
+                    type='font-awesome'
+                    name="map-signs"
+                    size={20}
                     color={tintColor}
                 />
             );
@@ -36,17 +39,18 @@ class Subscriptions extends Component {
             color: SECONDARY_COLOR
         },
     }
+    
 
     componentWillMount() {
-        this.props.clubSubFetch();
+        this.props.clubFetch();
     }
 
     componentWillReceiveProps(nextProps) {
         // console.log('=================================');
         // console.log('componentWillReceiveProps this.props.club test: ');
         // console.log(this.props.club);
-        if (this.props.clubSub !== nextProps.clubSub) {
-            this.setState({ clubSub: nextProps.clubSub });
+        if (this.props.clubs !== nextProps.clubs) {
+            this.setState({ clubs: nextProps.clubs });
         }
         // console.log('=================================');
         // console.log('componentWillReceiveProps nextProps test: ');
@@ -55,10 +59,10 @@ class Subscriptions extends Component {
     
     renderCard() {
         const { navigate } = this.props.navigation;
-        return this.props.clubSub.map(clubSub => {
+        return this.props.clubs.map(clubs => {
             const {
                 name, detail, category, uid
-            } = clubSub;
+            } = clubs;
 
             return (
                 <Card
@@ -75,23 +79,6 @@ class Subscriptions extends Component {
                         <Button
                             Component={TouchableOpacity}
                             raised // gives a shadow
-                            icon={{ name: 'delete' }}
-                            backgroundColor='#03A9F4'
-                            buttonStyle={{ 
-                                borderRadius: 0,
-                                marginLeft: 0,
-                                marginRight: 0,
-                                marginBottom: 0,
-                                backgroundColor: PRIMARY_COLOR
-                            }}
-                            title='Remove Sub'
-                            onPress={() => {
-                                this.props.clubSubRemove({ uid });
-                            }}
-                        />
-                        {/* <Button
-                            Component={TouchableOpacity}
-                            raised // gives a shadow
                             icon={{ name: 'pageview' }}
                             backgroundColor='#03A9F4'
                             buttonStyle={{
@@ -102,7 +89,7 @@ class Subscriptions extends Component {
                             }}
                             title='View Page'
                             onPress={() => navigate('Club')}
-                        /> */}
+                        />
                     </View>
             </Card>
             );
@@ -112,7 +99,9 @@ class Subscriptions extends Component {
     render() {
         return (
             <ScrollView
-                style={{ backgroundColor: '#ecf0f1' }}
+                style={{
+                    backgroundColor: '#ecf0f1'
+                }}
             >
                 {this.renderCard()}
             </ScrollView>
@@ -121,29 +110,22 @@ class Subscriptions extends Component {
 }
 
 const mapStateToProps = state => {
-    const clubSub = _.map(state.clubSub, (val, uid) => {
+    const clubs = _.map(state.clubs, (val, uid) => {
       return { ...val, uid };
     });
     // console.log('=================================');
     // console.log('mapStateToPropts test: ');
-    // console.log(clubSub);
-    return { clubSub };
+    // console.log(clubs);
+    return { clubs };
   };
 
-// function mapStateToProps({ clubSub }) {
+// function mapStateToProps({ clubs }) {
 //     console.log('=================================');
 //     console.log('mapStateToPropts test: ');
-//     console.log(clubSub.club);
+//     console.log(clubs.club);
 //     return {
-//         club: clubSub.club
+//         club: clubs.club
 //     };
+// }
 
-//     render() {
-//         return (
-//             <Text> Work in Progress </Text>
-//         );
-//     }
-//  }
-
-export default connect(mapStateToProps, { clubSubFetch, clubSubRemove })(Subscriptions);
-// export default Subscriptions;
+export default connect(mapStateToProps, { clubFetch, clubSubAdd })(ClubListWithUser);

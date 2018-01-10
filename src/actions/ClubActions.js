@@ -4,8 +4,10 @@ import {
     CLUB_UPDATE,
     CLUB_CREATE,
     CLUB_FETCH_SUCCESS,
-    CLUB_NAME_FETCH,
-    CLUB_SAVE_SUCCESS
+    CLUB_SUB_FETCH_SUCCESS,
+    CLUB_SAVE_SUCCESS,
+    CLUB_SUB_ADD_SUCCESS,
+    CLUB_SUB_REMOVE_SUCCESS
 } from './types';
 
 export const clubUpdate = ({ prop, value }) => {
@@ -41,15 +43,56 @@ export const clubCreate = ({ name, detail, category }) => {
 // Called to receive information of the club from Firebase
 export const clubFetch = () => {
     const ref = firebase.database().ref('/users/0DuPG18OlYRWUKpaugPvK6t6IIE3/clubs');
-    console.log('=================================');
-    console.log('clubFetch test: ');
-    console.log(ref);
-
    return (dispatch) => {
        ref.on('value', snapshot => {
            dispatch({ type: CLUB_FETCH_SUCCESS, payload: snapshot.val() });
        });
    };
+};
+
+// Called to receive information of the club from Firebase
+export const clubSubFetch = () => {
+    const { currentUser } = firebase.auth();
+    return (dispatch) => {
+        firebase.database().ref(`/users/${currentUser.uid}/clubs`)
+            .on('value', snapshot => {
+                dispatch({ type: CLUB_SUB_FETCH_SUCCESS, payload: snapshot.val() });
+        });
+    };
+};
+
+// Will create a list of subs that the user took from the admin
+export const clubSubAdd = ({ name, detail, category, uid }) => {
+    const { currentUser } = firebase.auth();
+    let check;
+    const ref = firebase.database().ref(`/users/${currentUser.uid}/clubs`);
+    ref.once('value')
+        .then(snapshot => {
+            check = snapshot.child(`${uid}/name`).val();
+        });
+    console.log(check);
+    console.log(name);
+    if (name !== check) {
+        return (dispatch) => {
+            firebase.database().ref(`/users/${currentUser.uid}/clubs`)
+            .push({ name, detail, category })
+            .then(() => {
+                dispatch({ type: CLUB_SUB_ADD_SUCCESS });
+            });
+        };
+    }
+};
+
+// Will create a list of subs that the user took from the admin
+export const clubSubRemove = ({ uid }) => {
+    const { currentUser } = firebase.auth();
+    return (dispatch) => {
+        firebase.database().ref(`/users/${currentUser.uid}/clubs/${uid}`)
+            .remove()
+            .then(() => {
+                dispatch({ type: CLUB_SUB_REMOVE_SUCCESS });
+        });
+    };
 };
 
  // Used to save club edit
