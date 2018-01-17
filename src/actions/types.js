@@ -1,4 +1,9 @@
 export const CLUB_FETCH_SUCCESS = 'club_fetch_success';
+
+export const CLUB_SUB_FETCH_SUCCESS = 'club_sub_fetch_success';
+export const CLUB_SUB_ADD_SUCCESS = 'club_sub_add_success';
+export const CLUB_SUB_REMOVE_SUCCESS = 'club_sub_remove_success';
+
 export const CLUB_UPDATE = 'club_update';
 export const CLUB_CREATE = 'club_create';
 export const CLUB_SAVE_SUCCESS = 'club_save_success';

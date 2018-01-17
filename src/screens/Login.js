@@ -15,7 +15,7 @@ import * as actions from '../actions';
 import { Spinner } from '../components/Spinner';
 
 
-import { PRIMARY_COLOR } from '../constants/style';
+import { PRIMARY_COLOR, SECONDARY_COLOR } from '../constants/style';
 
 // Purpose of this auth screen is just to call action creator
 class Login extends Component {
@@ -32,7 +32,14 @@ class Login extends Component {
                     color={tintColor}
                 />
             );
-        }
+        },
+        headerStyle: {
+          backgroundColor: PRIMARY_COLOR
+          
+      },
+      headerTitleStyle: {
+          color: SECONDARY_COLOR
+      },
     })
 
   //////////////////////////////////////////////////////////////////////////////////

@@ -1,6 +1,7 @@
 //Import libraries
 import React from 'react';
 import { Text, TouchableOpacity } from 'react-native';
+import { PRIMARY_COLOR } from '../constants/style';
 
 //Create component
 const Button = ({ onPress, children }) => {
@@ -27,7 +28,7 @@ const styles = {
     buttonStyle: {
         flex: 1,
         alignSelf: 'stretch',
-        backgroundColor: '#27ae60',
+        backgroundColor: PRIMARY_COLOR,
         borderRadius: 5,
         borderWidth: 1,
         borderColor: 'white',

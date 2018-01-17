@@ -19,7 +19,7 @@ const styles = {
         backgroundColor: 'white',
         justifyContent: 'flex-start',
         flexDirection: 'row',   // spaces items vertically
-        borderColor: '#27ae60',
+        //borderColor: '#27ae60',
         position: 'relative',
     }
 };
