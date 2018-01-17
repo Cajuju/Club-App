@@ -5,7 +5,7 @@ import { StackNavigator, TabNavigator } from 'react-navigation';
 import firebase from 'firebase';
 import { connect } from 'react-redux';
 import { Card, Button, Icon, colors } from 'react-native-elements';
-import { clubFetch, clubSubAdd } from '../actions';
+import { clubFetch, clubSubAdd, clubSubRemove } from '../actions';
 
 import { PRIMARY_COLOR, SECONDARY_COLOR } from '../constants/style';
 
@@ -66,58 +66,108 @@ class ClubList extends Component {
                 name, detail, category, uid
             } = clubs;
             //If the user is an admin, it will render the "edit" and "delete" button
-            if (firebase.auth().currentUser.uid === '0DuPG18OlYRWUKpaugPvK6t6IIE3') {
-                return (
-                    <Card
-                        title={name}
-                        titleStyle={{ fontSize: 20 }}
-                    >
-                        <Text style={{ textAlign: 'center', marginBottom: 10 }}>
-                                {detail}
-                        </Text>
-                        <Text style={{ marginBottom: 10 }}>
-                                {category}
-                        </Text>
-                        <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-                            <Button
-                                Component={TouchableOpacity}
-                                raised // gives a shadow
-                                underlayColor={'white'}
-                                icon={{ name: 'delete' }}
-                                backgroundColor='#03A9F4'
-                                buttonStyle={{ 
-                                    borderRadius: 0,
-                                    marginLeft: 0,
-                                    marginRight: 0,
-                                    marginBottom: 0,
-                                    backgroundColor: PRIMARY_COLOR,
-                                    width: 150
-                                }}
-                                title='Delete'
-                                onPress={() => {
-                                    this.props.clubSubRemove({ uid });
-                                }}
-                            />
-                            <Button
-                                Component={TouchableOpacity}
-                                raised // gives a shadow
-                                icon={{ name: 'edit' }}
-                                backgroundColor='#03A9F4'
-                                buttonStyle={{
-                                    borderRadius: 0,
-                                    marginLeft: 0,
-                                    marginRight: 0,
-                                    marginBottom: 0,
-                                    backgroundColor: PRIMARY_COLOR,
-                                    width: 150
-                                }}
-                                title='Edit'
-                                onPress={() => navigate('ClubEdit')}
-                            />
-                        </View>
-                </Card>
-                );
-                //If there is a generic user, it will render cards with "view page" and "subscribe"
+            if (firebase.auth().currentUser) {
+                if (firebase.auth().currentUser.uid === '0DuPG18OlYRWUKpaugPvK6t6IIE3') {
+                    return (
+                        <Card
+                            title={name}
+                            titleStyle={{ fontSize: 20 }}
+                        >
+                            <Text style={{ textAlign: 'center', marginBottom: 10 }}>
+                                    {detail}
+                            </Text>
+                            <Text style={{ marginBottom: 10 }}>
+                                    {category}
+                            </Text>
+                            <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
+                                <Button
+                                    Component={TouchableOpacity}
+                                    raised // gives a shadow
+                                    underlayColor={'white'}
+                                    icon={{ name: 'delete' }}
+                                    backgroundColor='#03A9F4'
+                                    buttonStyle={{ 
+                                        borderRadius: 0,
+                                        marginLeft: 0,
+                                        marginRight: 0,
+                                        marginBottom: 0,
+                                        backgroundColor: PRIMARY_COLOR,
+                                        width: 150
+                                    }}
+                                    title='Delete'
+                                    onPress={() => {
+                                        this.props.clubSubRemove({ uid });
+                                    }}
+                                />
+                                <Button
+                                    Component={TouchableOpacity}
+                                    raised // gives a shadow
+                                    icon={{ name: 'edit' }}
+                                    backgroundColor='#03A9F4'
+                                    buttonStyle={{
+                                        borderRadius: 0,
+                                        marginLeft: 0,
+                                        marginRight: 0,
+                                        marginBottom: 0,
+                                        backgroundColor: PRIMARY_COLOR,
+                                        width: 150
+                                    }}
+                                    title='Edit'
+                                    onPress={() => navigate('ClubEdit')}
+                                />
+                            </View>
+                    </Card>
+                    );
+                    //If there is a generic user, it will render cards with "view page" and "subscribe"
+                } else {
+                    return (
+                        <Card
+                            title={name}
+                            titleStyle={{ fontSize: 20 }}
+                        >
+                            <Text style={{ textAlign: 'center', marginBottom: 10 }}>
+                                    {detail}
+                            </Text>
+                            <Text style={{ marginBottom: 10 }}>
+                                    {category}
+                            </Text>
+                            <View>
+                                <Button
+                                    Component={TouchableOpacity}
+                                    raised // gives a shadow
+                                    underlayColor={'white'}
+                                    icon={{ name: 'add' }}
+                                    backgroundColor='#03A9F4'
+                                    buttonStyle={{ 
+                                        borderRadius: 0,
+                                        marginLeft: 0,
+                                        marginRight: 0,
+                                        marginBottom: 0,
+                                        backgroundColor: PRIMARY_COLOR
+                                    }}
+                                    title='SUBSCRIBE'
+                                    onPress={() => {
+                                        this.props.clubSubAdd({ name, detail, category, uid });
+                                    }}
+                                />
+                                <Button
+                                    Component={TouchableOpacity}
+                                    raised // gives a shadow
+                                    icon={{ name: 'pageview' }}
+                                    backgroundColor='#03A9F4'
+                                    buttonStyle={{
+                                        borderRadius: 0,
+                                        marginLeft: 0,
+                                        marginRight: 0,
+                                        marginBottom: 0
+                                    }}
+                                    title='View Page'
+                                    onPress={() => navigate('Club')}
+                                />
+                            </View>
+                    </Card>
+                    );
+                }
             }
             return (
                 <Card
@@ -134,24 +184,6 @@ class ClubList extends Component {
                         <Button
                             Component={TouchableOpacity}
                             raised // gives a shadow
-                            underlayColor={'white'}
-                            icon={{ name: 'add' }}
-                            backgroundColor='#03A9F4'
-                            buttonStyle={{ 
-                                borderRadius: 0,
-                                marginLeft: 0,
-                                marginRight: 0,
-                                marginBottom: 0,
-                                backgroundColor: PRIMARY_COLOR
-                            }}
-                            title='SUBSCRIBE'
-                            onPress={() => {
-                                this.props.clubSubAdd({ name, detail, category, uid });
-                            }}
-                        />
-                        <Button
-                            Component={TouchableOpacity}
-                            raised // gives a shadow
                             icon={{ name: 'pageview' }}
                             backgroundColor='#03A9F4'
                             buttonStyle={{
@@ -165,7 +197,7 @@ class ClubList extends Component {
                         />
                     </View>
             </Card>
-            );
+            );  
         });
     }
 
@@ -190,4 +222,4 @@ const mapStateToProps = state => {
   };
 
 
-export default connect(mapStateToProps, { clubFetch, clubSubAdd })(ClubList);
+export default connect(mapStateToProps, { clubFetch, clubSubAdd, clubSubRemove })(ClubList);

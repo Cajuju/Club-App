@@ -12,7 +12,6 @@ import store from './src/store/index';
 import Subscriptions from './src/screens/Subscriptions';
 import Profile from './src/screens/Profile';
 import ClubList from './src/screens/ClubList';
-import ClubListNoUser from './src/screens/ClubListNoUser';
 
 //import Club from './src/screens/Club';
 import Login from './src/screens/Login';
@@ -73,7 +72,7 @@ class App extends Component {
     ////////////////////////////////////////////////////////////////////////////////
     const noUser = TabNavigator({
       //Feed: { screen: Feed },
-      ClubList: { screen: ClubListNoUser },
+      ClubList: { screen: ClubList },
       Login: { screen: Login }
     }, {
       tabBarOptions: {
