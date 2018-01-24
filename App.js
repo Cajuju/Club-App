@@ -1,6 +1,6 @@
 import Expo from 'expo';
 import React, { Component } from 'react';
-import { StyleSheet, View, Platform } from 'react-native';
+import { StyleSheet, View, Platform, StatusBar } from 'react-native';
 import { StackNavigator, TabNavigator } from 'react-navigation';
 import { Provider } from 'react-redux';
 
@@ -119,6 +119,9 @@ class App extends Component {
     return (
       <Provider store={store}>
         <View style={styles.container}>
+          <StatusBar
+            barStyle='light-content'
+          />
           <MainNavigator />
         </View>
       </Provider>

@@ -1,10 +1,9 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
-import { View, ScrollView, ListView, Text, Image, TouchableOpacity } from 'react-native';
-import { StackNavigator, TabNavigator } from 'react-navigation';
+import { View, ScrollView, Text, Image, TouchableOpacity } from 'react-native';
 import firebase from 'firebase';
 import { connect } from 'react-redux';
-import { Card, Button, Icon, colors } from 'react-native-elements';
+import { Card, Button, Icon } from 'react-native-elements';
 import { clubFetch, clubSubAdd, clubSubRemove } from '../actions';
 
 import { PRIMARY_COLOR, SECONDARY_COLOR } from '../constants/style';
@@ -180,20 +179,18 @@ class ClubList extends Component {
                     <Text style={{ marginBottom: 10 }}>
                             {category}
                     </Text>
-                    <View>
+                    <View style={{ alignItems: 'center' }}>
                         <Button
                             Component={TouchableOpacity}
                             raised // gives a shadow
+                            rounded
                             icon={{ name: 'pageview' }}
                             backgroundColor='#03A9F4'
-                            buttonStyle={{
-                                borderRadius: 0,
-                                marginLeft: 0,
-                                marginRight: 0,
-                                marginBottom: 0
-                            }}
                             title='View Page'
                             onPress={() => navigate('Club')}
+                            buttonStyle={{
+                                width: 150,
+                            }}
                         />
                     </View>
             </Card>
