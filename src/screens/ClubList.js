@@ -1,10 +1,9 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
-import { View, ScrollView, ListView, Text, Image, TouchableOpacity } from 'react-native';
-import { StackNavigator, TabNavigator } from 'react-navigation';
+import { View, ScrollView, Text, Image, TouchableOpacity } from 'react-native';
 import firebase from 'firebase';
 import { connect } from 'react-redux';
-import { Card, Button, Icon, colors } from 'react-native-elements';
+import { Card, Button, Icon, Badge } from 'react-native-elements';
 import { clubFetch, clubSubAdd, clubSubRemove } from '../actions';
 
 import { PRIMARY_COLOR, SECONDARY_COLOR } from '../constants/style';
@@ -32,13 +31,13 @@ class ClubList extends Component {
                  color={SECONDARY_COLOR}
             />
          ),
-         headerStyle: {
+        headerStyle: {
             backgroundColor: PRIMARY_COLOR
             
         },
         headerTitleStyle: {
             color: SECONDARY_COLOR
-        },
+        }
     }
     
 
@@ -76,24 +75,17 @@ class ClubList extends Component {
                             <Text style={{ textAlign: 'center', marginBottom: 10 }}>
                                     {detail}
                             </Text>
-                            <Text style={{ marginBottom: 10 }}>
-                                    {category}
-                            </Text>
-                            <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
+                            <Badge
+                                value={category}
+                                textStyle={{ color: 'white' }}
+                                containerStyle={styles.badge_style}
+                            />
+                            <View style={styles.bttn_view}>
                                 <Button
                                     Component={TouchableOpacity}
                                     raised // gives a shadow
-                                    underlayColor={'white'}
                                     icon={{ name: 'delete' }}
-                                    backgroundColor='#03A9F4'
-                                    buttonStyle={{ 
-                                        borderRadius: 0,
-                                        marginLeft: 0,
-                                        marginRight: 0,
-                                        marginBottom: 0,
-                                        backgroundColor: PRIMARY_COLOR,
-                                        width: 150
-                                    }}
+                                    buttonStyle={styles.bttn_style}
                                     title='Delete'
                                     onPress={() => {
                                         this.props.clubSubRemove({ uid });
@@ -103,15 +95,7 @@ class ClubList extends Component {
                                     Component={TouchableOpacity}
                                     raised // gives a shadow
                                     icon={{ name: 'edit' }}
-                                    backgroundColor='#03A9F4'
-                                    buttonStyle={{
-                                        borderRadius: 0,
-                                        marginLeft: 0,
-                                        marginRight: 0,
-                                        marginBottom: 0,
-                                        backgroundColor: PRIMARY_COLOR,
-                                        width: 150
-                                    }}
+                                    buttonStyle={styles.bttn_style}
                                     title='Edit'
                                     onPress={() => navigate('ClubEdit')}
                                 />
@@ -128,23 +112,17 @@ class ClubList extends Component {
                             <Text style={{ textAlign: 'center', marginBottom: 10 }}>
                                     {detail}
                             </Text>
-                            <Text style={{ marginBottom: 10 }}>
-                                    {category}
-                            </Text>
-                            <View>
+                            <Badge
+                                value={category}
+                                textStyle={{ color: 'white' }}
+                                containerStyle={styles.badge_style}
+                            />
+                            <View style={styles.bttn_view}>
                                 <Button
                                     Component={TouchableOpacity}
                                     raised // gives a shadow
-                                    underlayColor={'white'}
                                     icon={{ name: 'add' }}
-                                    backgroundColor='#03A9F4'
-                                    buttonStyle={{ 
-                                        borderRadius: 0,
-                                        marginLeft: 0,
-                                        marginRight: 0,
-                                        marginBottom: 0,
-                                        backgroundColor: PRIMARY_COLOR
-                                    }}
+                                    buttonStyle={styles.bttn_style}
                                     title='SUBSCRIBE'
                                     onPress={() => {
                                         this.props.clubSubAdd({ name, detail, category, uid });
@@ -154,13 +132,7 @@ class ClubList extends Component {
                                     Component={TouchableOpacity}
                                     raised // gives a shadow
                                     icon={{ name: 'pageview' }}
-                                    backgroundColor='#03A9F4'
-                                    buttonStyle={{
-                                        borderRadius: 0,
-                                        marginLeft: 0,
-                                        marginRight: 0,
-                                        marginBottom: 0
-                                    }}
+                                    buttonStyle={styles.bttn_style}
                                     title='View Page'
                                     onPress={() => navigate('Club')}
                                 />
@@ -177,21 +149,18 @@ class ClubList extends Component {
                     <Text style={{ textAlign: 'center', marginBottom: 10 }}>
                             {detail}
                     </Text>
-                    <Text style={{ marginBottom: 10 }}>
-                            {category}
-                    </Text>
-                    <View>
+                    <Badge
+                        value={category}
+                        textStyle={{ color: 'white' }}
+                        containerStyle={styles.badge_style}
+                    />
+                    <View style={styles.bttn_view}>
                         <Button
                             Component={TouchableOpacity}
                             raised // gives a shadow
+                            rounded
+                            buttonStyle={styles.bttn_style}
                             icon={{ name: 'pageview' }}
-                            backgroundColor='#03A9F4'
-                            buttonStyle={{
-                                borderRadius: 0,
-                                marginLeft: 0,
-                                marginRight: 0,
-                                marginBottom: 0
-                            }}
                             title='View Page'
                             onPress={() => navigate('Club')}
                         />
@@ -221,5 +190,26 @@ const mapStateToProps = state => {
     return { clubs };
   };
 
+/////////////////////////////////////////////////////////////////
+//////// Style Object
+const styles = {
+    bttn_style: {
+        borderRadius: 0,
+        marginLeft: 0,
+        marginRight: 0,
+        marginBottom: 0,
+        backgroundColor: PRIMARY_COLOR,
+        width: 150
+    },
+    bttn_view: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'center'
+    },
+    badge_style: {
+        width: 120,
+        margin: 10
+    }
+};
 
 export default connect(mapStateToProps, { clubFetch, clubSubAdd, clubSubRemove })(ClubList);

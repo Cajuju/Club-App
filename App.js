@@ -1,6 +1,6 @@
 import Expo from 'expo';
 import React, { Component } from 'react';
-import { StyleSheet, View, Platform } from 'react-native';
+import { StyleSheet, View, Platform, StatusBar } from 'react-native';
 import { StackNavigator, TabNavigator } from 'react-navigation';
 import { Provider } from 'react-redux';
 
@@ -8,12 +8,12 @@ import firebase from 'firebase';
 
 import store from './src/store/index';
 
-//import Feed from './src/screens/Feed';
+import Feed from './src/screens/Feed';
 import Subscriptions from './src/screens/Subscriptions';
 import Profile from './src/screens/Profile';
 import ClubList from './src/screens/ClubList';
 
-//import Club from './src/screens/Club';
+import Club from './src/screens/Club';
 import Login from './src/screens/Login';
 import LogOut from './src/screens/LogOut';
 import ClubCreate from './src/screens/ClubCreate';
@@ -52,7 +52,7 @@ class App extends Component {
     // Breaking down the navigator helps with complex screen layout
 
     const Admin = TabNavigator({
-      //Feed: { screen: Feed },
+      Feed: { screen: Feed },
       ClubList: { screen: ClubList },
       ClubCreate: { screen: ClubCreate },
       Profile: { screen: Profile }
@@ -71,7 +71,7 @@ class App extends Component {
 
     ////////////////////////////////////////////////////////////////////////////////
     const noUser = TabNavigator({
-      //Feed: { screen: Feed },
+      Feed: { screen: Feed },
       ClubList: { screen: ClubList },
       Login: { screen: Login }
     }, {
@@ -87,7 +87,7 @@ class App extends Component {
 
     ////////////////////////////////////////////////////////////////////////////////
     const yesUser = TabNavigator({
-      //Feed: { screen: Feed },
+      Feed: { screen: Feed },
       ClubList: { screen: ClubList },
       Subscriptions: { screen: Subscriptions },
       Profile: { screen: Profile }
@@ -109,7 +109,8 @@ class App extends Component {
       Main: { screen: yesUser },
       Admin: { screen: Admin },
       LogOut: { screen: LogOut },
-      ClubEdit: { screen: ClubEdit }
+      ClubEdit: { screen: ClubEdit },
+      Club: { screen: Club }
     }, {
       navigationOptions: { 
         tabBarVisible: false,
@@ -119,6 +120,9 @@ class App extends Component {
     return (
       <Provider store={store}>
         <View style={styles.container}>
+          <StatusBar
+            barStyle='light-content'
+          />
           <MainNavigator />
         </View>
       </Provider>

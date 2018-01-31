@@ -22,8 +22,16 @@ class Feed extends Component {
                 type='material-community'
                 name='filter-variant'
                 style={{ marginRight: 20 }}
+                color={SECONDARY_COLOR}
            />
-        )
+        ),
+        headerStyle: {
+            backgroundColor: PRIMARY_COLOR
+            
+        },
+        headerTitleStyle: {
+            color: SECONDARY_COLOR
+        },
     }
 
     render() {
